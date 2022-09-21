@@ -65,5 +65,5 @@ try:
             if h[0]=="DELETE":
                 DELETE(z,items)
         SUM(items)
-except EOFError as e:
+except:
     pass
