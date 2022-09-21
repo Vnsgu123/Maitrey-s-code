@@ -1,3 +1,4 @@
+# cook your dish here
 
 '''
 This script is code stub for CodeChef problem code APLAM1_PY
@@ -37,10 +38,15 @@ if __name__ == '__main__':
         d=int(d)
         n=int(n)
         AP_series = generate_AP(a1, d, n)
-        print(AP_series)
+        b = ''.join(str(AP_series).split(','))
+        # AP_series=AP_series.replace(',',' ')
+        k=str(b)[1:-1]
+        print(k)
         # Using lambda and map functions, find squares of terms in AP series and print it
         sqr_AP_series = list(map(lambda x : x*x, AP_series))
-        print(sqr_AP_series)
+        c = ''.join(str(sqr_AP_series).split(','))
+        u=str(c)[1:-1]
+        print(u)
 
         # Using lambda and reduce functions, find sum of squares of terms in AP series and print it
         sum_sqr_AP_series = reduce(lambda x ,y : x+y,sqr_AP_series)
