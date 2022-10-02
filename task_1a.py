@@ -15,8 +15,8 @@
 *****************************************************************************************
 '''
 
-# Team ID:			[ Team-ID ]
-# Author List:		[ Names of team members worked on this file separated by Comma: Name1, Name2, ... ]
+# Team ID:			[ PB_1481 ]
+# Author List:		[ Maitrey ,Arin ,Rushil ,Hardik]
 # Filename:			task_1a.py
 # Functions:		detect_traffic_signals, detect_horizontal_roads_under_construction, detect_vertical_roads_under_construction,
 #					detect_medicine_packages, detect_arena_parameters
