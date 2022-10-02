@@ -15,8 +15,8 @@
 *****************************************************************************************
 '''
 
-# Team ID:			[ Team-ID ]
-# Author List:		[ Names of team members worked on this file separated by Comma: Name1, Name2, ... ]
+# Team ID:			[ PB_1481 ]
+# Author List:		[ Hardik ,Rushil ,Arin ,Maitrey ]
 # Filename:			task_1b.py
 # Functions:		detect_Qr_details, detect_ArUco_details
 # 					[ Comma separated list of functions in this file ]
