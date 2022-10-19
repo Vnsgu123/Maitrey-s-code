@@ -71,47 +71,67 @@ def control_logic(sim):
 	# import sim
 	t=1
 	l=sim.getObject("/Diff_Drive_Bot")
-	k=sim.getObject("/distance_sensor_1") 
+	# k=sim.getObject("/distance_sensor_1") 
 	#j=sim.getObject("/distance_sensor_2")
 	h=sim.getObject("/left_joint")
 	w=sim.getObject("/right_joint")
 	g=sim.getObject("/right_wheel")
 	q=sim.getObject("/left_wheel")
-	distance_2 = detect_distance_sensor_2(sim)
-	distance_1 = detect_distance_sensor_1(sim)
-	print("\nNew")
-	print(distance_2)
-	linearVelocity,angularVelocity=sim.getVelocity(q)
-	print("&&&&&&&&",linearVelocity)
-	sim.setJointTargetVelocity(h,4)
-	sim.setJointTargetVelocity(w,4)
+	# distance_2 = detect_distance_sensor_2(sim)
+	# distance_1 = detect_distance_sensor_1(sim)
+	# print("\nNew")
+	# print(distance_2)
+	# linearVelocity,angularVelocity=sim.getVelocity(q)
+	# print("&&&&&&&&",linearVelocity)
+	sim.setJointTargetVelocity(h,1)
+	sim.setJointTargetVelocity(w,1)
+	# linearVelocityy,angularVelocity=sim.getVelocity(g)
+	# linearVelocityy2,angularVelocity=sim.getVelocity(q)
+	# print("!!!!!!!!!!!!!!!!!!!!!",linearVelocityy,linearVelocityy2)
+
 
 
 	pp=0
 	v=0
+	y=5
+	u=1
 
 
 	while t:
-		if(distance_2<0):
-			t=0
 		distance_2 = detect_distance_sensor_2(sim)
 		distance_1 = detect_distance_sensor_1(sim)
+		if(distance_2<0):
+			t=0
+		
 		# sim.setJointTargetVelocity(h,v)
-		if (float(distance_2)-float(distance_1)) < float(0.03):
+		if ((float(distance_1)-float(distance_2)) < float(0.09)) and ((float(distance_1)-float(distance_2)) > float(-0.09)):
 			print("------")
 			# linearVelocity,angularVelocity=sim.getVelocity(q)
 			sim.setJointTargetVelocity(h,v)
-		if (float(distance_2)-float(distance_1)) < float(0.16):
-				linearVelocity,angularVelocity=sim.getVelocity(h)
-				linearVelocity2,angularVelocity=sim.getVelocity(w)
+			print("+++++",distance_2,distance_1)
 
-				print("&&&&&&&&",linearVelocity,linearVelocity2)
-				sim.setJointTargetVelocity(h,4)
+		if (distance_1 == 0) and ((float(distance_2) > float(0.206)) and (float(distance_2) < float(0.207))):
+			sim.setJointTargetVelocity(h,1)
+			print("jnfhuhsy")
+
+
+			# t=0
+	# while y:
+	# 	y=y-1
+	# while u:
+
+	# 	if((float(distance_2)-float(distance_1)) < float(0.174)):
+
+	# 			linearVelocity,angularVelocity=sim.getVelocity(g)
+	# 			linearVelocity2,angularVelocity=sim.getVelocity(q)
+
+	# 			print("&&&&&&&&",linearVelocity,linearVelocity2)
+	# 			sim.setJointTargetVelocity(h,2)
 
       
 
 
-		print(distance_2)	
+	# 	print(distance_2)	
 		
 
 
@@ -130,8 +150,8 @@ def control_logic(sim):
       
 	# detectedObjectHandle=sim.readProximitySensor(j)
 	# print(detectedObjectHandle)
-	print(l,k)
-	print(sim)
+	# print(l,k)
+	# print(sim)
 
 
 
@@ -172,7 +192,7 @@ def detect_distance_sensor_1(sim):
 	# print(distance1)
 	# distance=distance1
 	result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.readProximitySensor(k)
-	print("\nOld")
+	print("\nOld-----------")
 	print(distance2)
 	distance=distance2
 
