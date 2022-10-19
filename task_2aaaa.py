@@ -37,6 +37,7 @@ import traceback
 import time
 import os
 import math
+from xml.dom.minidom import TypeInfo
 from zmqRemoteApi import RemoteAPIClient
 import zmq
 ##############################################################
@@ -70,13 +71,52 @@ def control_logic(sim):
 	# import sim
 	t=1
 	l=sim.getObject("/Diff_Drive_Bot")
-	# k=sim.getObject("/distance_sensor_1") 
-	j=sim.getObject("/distance_sensor_2")
-	h=sim.getObject("/left_wheel_visible")
-	g=sim.getObject("/right_wheel_visible")
-	# distance_2 = detect_distance_sensor_2(sim)
-	distance2=sim.handleProximitySensor(j)
-	print(distance2)
+	k=sim.getObject("/distance_sensor_1") 
+	#j=sim.getObject("/distance_sensor_2")
+	h=sim.getObject("/left_joint")
+	w=sim.getObject("/right_joint")
+	g=sim.getObject("/right_wheel")
+	q=sim.getObject("/left_wheel")
+	distance_2 = detect_distance_sensor_2(sim)
+	distance_1 = detect_distance_sensor_1(sim)
+	print("\nNew")
+	print(distance_2)
+	linearVelocity,angularVelocity=sim.getVelocity(q)
+	print("&&&&&&&&",linearVelocity)
+	sim.setJointTargetVelocity(h,4)
+	sim.setJointTargetVelocity(w,4)
+
+
+	pp=0
+	v=0
+
+
+	while t:
+		if(distance_2<0):
+			t=0
+		distance_2 = detect_distance_sensor_2(sim)
+		distance_1 = detect_distance_sensor_1(sim)
+		# sim.setJointTargetVelocity(h,v)
+		if (float(distance_2)-float(distance_1)) < float(0.03):
+			print("------")
+			# linearVelocity,angularVelocity=sim.getVelocity(q)
+			sim.setJointTargetVelocity(h,v)
+		if (float(distance_2)-float(distance_1)) < float(0.16):
+				linearVelocity,angularVelocity=sim.getVelocity(h)
+				linearVelocity2,angularVelocity=sim.getVelocity(w)
+
+				print("&&&&&&&&",linearVelocity,linearVelocity2)
+				sim.setJointTargetVelocity(h,4)
+
+      
+
+
+		print(distance_2)	
+		
+
+
+	#distance2=sim.handleProximitySensor(j)
+	# print(distance2)
 
 
 
@@ -90,8 +130,8 @@ def control_logic(sim):
       
 	# detectedObjectHandle=sim.readProximitySensor(j)
 	# print(detectedObjectHandle)
-	# print(l,k,j)
-	# print(sim)
+	print(l,k)
+	print(sim)
 
 
 
@@ -122,7 +162,7 @@ def detect_distance_sensor_1(sim):
 	"""
 	# distance = None
 	# ##############  ADD YOUR CODE HERE  ##############
-	# k=sim.getObject("/distance_sensor_1")
+	k=sim.getObject("/distance_sensor_1")
 	# print(k)
 	# p,distance1=sim.handleProximitySensor(k)
 
@@ -131,6 +171,11 @@ def detect_distance_sensor_1(sim):
 	# # distanceData=sim.checkDistance(j,detectedObjectHandle)
 	# print(distance1)
 	# distance=distance1
+	result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.readProximitySensor(k)
+	print("\nOld")
+	print(distance2)
+	distance=distance2
+
 
 
 
@@ -139,7 +184,7 @@ def detect_distance_sensor_1(sim):
 
 
 	##################################################
-	# return distance
+	return distance
 
 def detect_distance_sensor_2(sim):
 	"""
@@ -161,9 +206,9 @@ def detect_distance_sensor_2(sim):
 	---
 	distance_2 = detect_distance_sensor_2(sim)
 	"""
-	# distance = None
+	distance = None
 	##############  ADD YOUR CODE HERE  ##############
-	# j=sim.getObject("/distance_sensor_2")
+	j=sim.getObject("/distance_sensor_2")
 	# for i in range(1,10):
 
 	# 	pos=sim.getObjectPosition(j,-1)
@@ -172,12 +217,21 @@ def detect_distance_sensor_2(sim):
 	# 	calculationResults=sim.handleProximitySensor(j)
 	# 	print(calculationResults)
 
+	#result,distance,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.handleProximitySensor(sim.handle_all_except_explicit)
+	#print(distance)
 
-	# result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.handleProximitySensor(j)
+
+
+	result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.readProximitySensor(j)
+	print("\nOld")
+	print(distance2)
+	distance=distance2
+
+#	result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.handleProximitySensor(j)
 
 	# detectedObjectHandle=sim.readProximitySensor(j)
 	# distanceData=sim.checkDistance(j,detectedObjectHandle)
-	# print(distance2)
+	
 	# distance=calculationResults
 
 
@@ -185,7 +239,7 @@ def detect_distance_sensor_2(sim):
 
 
 	##################################################
-	# return distance
+	return distance
 
 ######### YOU ARE NOT ALLOWED TO MAKE CHANGES TO THE MAIN CODE BELOW #########
 
