@@ -77,18 +77,20 @@ def control_logic(sim):
 	w=sim.getObject("/right_joint")
 	g=sim.getObject("/right_wheel")
 	q=sim.getObject("/left_wheel")
+	sim.setJointTargetVelocity(h,0)
+	sim.setJointTargetVelocity(w,0)
+
 	# distance_2 = detect_distance_sensor_2(sim)
 	# distance_1 = detect_distance_sensor_1(sim)
 	# print("\nNew")
 	# print(distance_2)
 	# linearVelocity,angularVelocity=sim.getVelocity(q)
 	# print("&&&&&&&&",linearVelocity)
-	sim.setJointTargetVelocity(h,1)
-	sim.setJointTargetVelocity(w,1)
+	sim.setJointTargetVelocity(h,3)
+	sim.setJointTargetVelocity(w,3)
 	# linearVelocityy,angularVelocity=sim.getVelocity(g)
 	# linearVelocityy2,angularVelocity=sim.getVelocity(q)
 	# print("!!!!!!!!!!!!!!!!!!!!!",linearVelocityy,linearVelocityy2)
-
 
 
 	pp=0
@@ -104,14 +106,14 @@ def control_logic(sim):
 			t=0
 		
 		# sim.setJointTargetVelocity(h,v)
-		if ((float(distance_1)-float(distance_2)) < float(0.09)) and ((float(distance_1)-float(distance_2)) > float(-0.09)):
+		if ((float(distance_1)-float(distance_2)) < float(0.13)) and ((float(distance_1)-float(distance_2)) > float(-0.13)):
 			print("------")
 			# linearVelocity,angularVelocity=sim.getVelocity(q)
 			sim.setJointTargetVelocity(h,v)
 			print("+++++",distance_2,distance_1)
 
-		if (distance_1 == 0) and ((float(distance_2) > float(0.206)) and (float(distance_2) < float(0.207))):
-			sim.setJointTargetVelocity(h,1)
+		if (distance_1 == 0) and ((float(distance_2) > float(0.181)) and (float(distance_2) < float(0.182))):
+			sim.setJointTargetVelocity(h,3)
 			print("jnfhuhsy")
 
 
