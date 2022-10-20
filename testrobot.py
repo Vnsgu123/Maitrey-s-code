@@ -111,9 +111,10 @@ def control_logic(sim):
 			# linearVelocity,angularVelocity=sim.getVelocity(q)
 			sim.setJointTargetVelocity(h,-3)
 			print("++(((((((((((((((((((",distance_2,distance_1)
-		if (distance_1 == 0) and ((float(distance_2) > float(0.171)) and (float(distance_2) < float(0.176))):
-                
+		if (distance_1 == 0) and ((float(distance_2) > float(0.170)) and (float(distance_2) < float(0.190))):
+			# deltaTimeLeft=sim.wait(1,True)
 			sim.setJointTargetVelocity(h,3)
+			# deltaTimeLeft=sim.wait(1,True)
 			print("jnfhuhsy")
 
 
