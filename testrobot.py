@@ -17,7 +17,6 @@
 *  Licensee/end user indemnifies and will keep e-Yantra indemnified from
 *  any and all claim(s) that emanate from the use of the Software or 
 *  breach of the terms of this agreement.
-*
 *****************************************************************************************
 '''
 
@@ -32,18 +31,17 @@
 ####################### IMPORT MODULES #######################
 ## You are not allowed to make any changes in this section. ##
 ##############################################################
+from difflib import diff_bytes
 import  sys
 import traceback
 import time
 import os
 import math
-from xml.dom.minidom import TypeInfo
 from zmqRemoteApi import RemoteAPIClient
 import zmq
 ##############################################################
 
 def control_logic(sim):
-    
 	"""
 	Purpose:
 	---
@@ -64,98 +62,90 @@ def control_logic(sim):
 	---
 	control_logic(sim)
 	"""
- 
 	##############  ADD YOUR CODE HERE  ##############
-	# sim.simxFinish(-1) # just in case, close all opened connections
-	# clientID=simxStart('127.0.0.1',19999,True,True,5000,5) # Connect to CoppeliaSim
-	# import sim
-	t=1
-	l=sim.getObject("/Diff_Drive_Bot")
-	# k=sim.getObject("/distance_sensor_1") 
-	#j=sim.getObject("/distance_sensor_2")
-	h=sim.getObject("/left_joint")
-	w=sim.getObject("/right_joint")
-	g=sim.getObject("/right_wheel")
-	q=sim.getObject("/left_wheel")
-	sim.setJointTargetVelocity(h,3)
-	sim.setJointTargetVelocity(w,3)
 
-	# distance_2 = detect_distance_sensor_2(sim)
-	# distance_1 = detect_distance_sensor_1(sim)
-	# print("\nNew")
+	# q=objectHandle=sim.getObject("/distance_sensor_1")
+	# w=objectHandle=sim.getObject("/distance_sensor_2")
+	e=objectHandle=sim.getObject("/left_joint")
+	r=objectHandle=sim.getObject("/right_joint")
+	t=objectHandle=sim.getObject("/right_wheel")
+	y=objectHandle=sim.getObject("/left_joint")
+	# list=[]
+	# list.append(0)
+	# list.append(0)
+	# list.append(0)
+	list=[]
+	list.append(30.0)
+	# list1.append(0)
+	# list1.append(0)
+	# sim.setJointTargetForce(e,0)
+	# sim.setJointTargetForce(r,0)
+	# sim.addForceAndTorque(y,list,list1)
+	# sim.addForceAndTorque(t,list,list1)
+	# linearVelocity,angularVelocity=sim.getObjectVelocity(e)
+	# linearVelocity1,angularVelocity=sim.getObjectVelocity(r)
+
+
+	sim.setJointTargetVelocity(e,4)
+	sim.setJointTargetVelocity(r,4)
+
+	bb=1
+	while bb:
+		t=1
+		m=1
+		n=1
+		p=1
+		while t:
+			distance_1 = detect_distance_sensor_1(sim)
+			distance_2 = detect_distance_sensor_2(sim)
+			print(distance_1)
+			print(distance_2)
+			diff=distance_1 - distance_2
+			print("--------",diff)
+			if diff < 0.065 and diff > -0.065:
+				print("iiiiii")
+				t=0
+				# yy=1s
+				sim.setJointTargetVelocity(e,-4)
+				# sim.setJointTargetVelocity(r,)
+		while m:	
+			distance_11 = detect_distance_sensor_1(sim)
+			distance_22 = detect_distance_sensor_2(sim)
+			print(distance_22,distance_11)
+			if (distance_11==0) and (distance_22 >= 0.166 and distance_22 <= 0.176):
+				print("@@@@@@@")
+				# sim.Simulation()
+				# resultt=sim.pauseSimulation()
+				sim.setJointTargetVelocity(e,-2)
+				# sim.setJointTargetVelocity(e,-3)
+				sim.setJointTargetVelocity(e,0)
+				sim.setJointTargetVelocity(e,2)
+				sim.setJointTargetVelocity(e,3)
+				# time.sleep(0.5)
+				sim.setJointTargetVelocity(e,4)	
+				# time.sleep(0.5)			
+				# resultt=sim.pauseSimulation()
+				# time.sleep(5)
+				# sim.startSimulation()
+				# sim.setJointTargetVelocity(r,0)
+				m=0
+		while n:
+			# sim.setJointTargetVelocity(e,4,2)
+			# sim.setJointTargetVelocity(r,4)
+			n=0
+		# while p:
+		# 	print()
+
+     
+
+
+
+
+	# print(distance_1)
 	# print(distance_2)
-	# linearVelocity,angularVelocity=sim.getVelocity(q)
-	# print("&&&&&&&&",linearVelocity)
-	# sim.setJointTargetVelocity(h,3)
-	# sim.setJointTargetVelocity(w,3)
-	# linearVelocityy,angularVelocity=sim.getVelocity(g)
-	# linearVelocityy2,angularVelocity=sim.getVelocity(q)
-	# print("!!!!!!!!!!!!!!!!!!!!!",linearVelocityy,linearVelocityy2)
 
 
-	pp=0
-	v=0
-	y=5
-	u=1
-
-
-	while t:
-		distance_2 = detect_distance_sensor_2(sim)
-		distance_1 = detect_distance_sensor_1(sim)
-		if(distance_2<0):
-			t=0
-		
-		# sim.setJointTargetVelocity(h,v)
-		if ((float(distance_1)-float(distance_2)) < float(0.03)) and ((float(distance_1)-float(distance_2)) > float(-0.03)):
-			print("------")
-			# linearVelocity,angularVelocity=sim.getVelocity(q)
-			sim.setJointTargetVelocity(h,-3)
-			print("++(((((((((((((((((((",distance_2,distance_1)
-		if (distance_1 == 0) and ((float(distance_2) > float(0.170)) and (float(distance_2) < float(0.190))):
-			# deltaTimeLeft=sim.wait(1,True)
-			sim.setJointTargetVelocity(h,3)
-			# deltaTimeLeft=sim.wait(1,True)
-			print("jnfhuhsy")
-
-
-			# t=0
-	# while y:
-	# 	y=y-1
-	# while u:
-
-	# 	if((float(distance_2)-float(distance_1)) < float(0.174)):
-
-	# 			linearVelocity,angularVelocity=sim.getVelocity(g)
-	# 			linearVelocity2,angularVelocity=sim.getVelocity(q)
-
-	# 			print("&&&&&&&&",linearVelocity,linearVelocity2)
-	# 			sim.setJointTargetVelocity(h,2)
-
-      
-
-
-	# 	print(distance_2)	
-		
-
-
-	#distance2=sim.handleProximitySensor(j)
-	# print(distance2)
-
-
-
-
-	# while t:
-		# distance_1 = detect_distance_sensor_1(sim)
-		# distance_2 = detect_distance_sensor_2(sim)
-		# if distance_1==distance_2 and distance_2>0:
-		# 	t=0
-
-      
-	# detectedObjectHandle=sim.readProximitySensor(j)
-	# print(detectedObjectHandle)
-	# print(l,k)
-	# print(sim)
-
+	# print(q)
 
 
 
@@ -183,25 +173,11 @@ def detect_distance_sensor_1(sim):
 	---
 	distance_1 = detect_distance_sensor_1(sim)
 	"""
-	# distance = None
-	# ##############  ADD YOUR CODE HERE  ##############
-	k=sim.getObject("/distance_sensor_1")
-	# print(k)
-	# p,distance1=sim.handleProximitySensor(k)
+	distance = None
+	##############  ADD YOUR CODE HERE  ##############
 
-	# # detectedObjectHandle=sim.readProximitySensor(j)
-	# # print(detectedObjectHandle)
-	# # distanceData=sim.checkDistance(j,detectedObjectHandle)
-	# print(distance1)
-	# distance=distance1
-	result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.readProximitySensor(k)
-	print("\nOld-----------")
-	print(distance2)
-	distance=distance2
-
-
-
-
+	q=objectHandle=sim.getObject("/distance_sensor_1")
+	result,distance,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.readProximitySensor(q)
 
 
 
@@ -231,33 +207,9 @@ def detect_distance_sensor_2(sim):
 	"""
 	distance = None
 	##############  ADD YOUR CODE HERE  ##############
-	j=sim.getObject("/distance_sensor_2")
-	# for i in range(1,10):
 
-	# 	pos=sim.getObjectPosition(j,-1)
-	# 	pos[2]=i/10
-	# 	sim.setObjectPosition(j,-1,pos)
-	# 	calculationResults=sim.handleProximitySensor(j)
-	# 	print(calculationResults)
-
-	#result,distance,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.handleProximitySensor(sim.handle_all_except_explicit)
-	#print(distance)
-
-
-
-	result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.readProximitySensor(j)
-	print("\nOld")
-	print(distance2)
-	distance=distance2
-
-#	result,distance2,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.handleProximitySensor(j)
-
-	# detectedObjectHandle=sim.readProximitySensor(j)
-	# distanceData=sim.checkDistance(j,detectedObjectHandle)
-	
-	# distance=calculationResults
-
-
+	w=objectHandle=sim.getObject("/distance_sensor_2")
+	result,distance,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=sim.readProximitySensor(w)
 
 
 
