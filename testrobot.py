@@ -63,6 +63,9 @@ def control_logic(sim):
 	control_logic(sim)
 	"""
 	##############  ADD YOUR CODE HERE  ##############
+	defaultIdleFps = sim.getInt32Param(sim.intparam_idle_fps)
+	sim.setInt32Param(sim.intparam_idle_fps, 0)
+
 
 	# q=objectHandle=sim.getObject("/distance_sensor_1")
 	# w=objectHandle=sim.getObject("/distance_sensor_2")
