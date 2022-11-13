@@ -85,16 +85,23 @@ def control_logic(sim):
 	sim.setJointTargetVelocity(e,1)
 	sim.setJointTargetVelocity(r,1)
 	t=1
+	i=1
 	flag4=0
 	flag=0
 	flag1=0
 	flag2=1
+	flag6=0
 	while t:
 		u=0
 		print("run")
 		img, resX, resY = sim.getVisionSensorCharImage(m)
+		# print(type(resX))
+		# resX=resX-20
+		# print(resX)
 		img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
 		img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
+		# print(img.shape)
+		img=img[0:512,70:442]
 		hsv=cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 		low_b = np.array([0,0,168])
 		high_b = np.array([172,111,255])
@@ -107,11 +114,16 @@ def control_logic(sim):
 		contours, hierarchy = cv2.findContours(mask, 1, cv2.CHAIN_APPROX_NONE)
 		contours1, hierarchy1 = cv2.findContours(mask1, 1, cv2.CHAIN_APPROX_NONE)
 		for contour in contours:
-			u=u+1
 			approx = cv2.approxPolyDP(contour, 0.01* cv2.arcLength(contour, True), True)
 			x,y,w,h=cv2.boundingRect(contour)
+			cv2.drawContours(img, [approx], 0, (0, 255, 255), 5)
+
+			print(x,y,w,h,len(contour))
+
 			# print("%%%%%%",w)
-			if w < 35 and w>25 and len(contour) < 350 and len(contour)>200:
+			if ((w < 34  and w>20) or (w > 39 and w < 43)) and len(contour) < 374 and len(contour)>200:
+				# if w < 60 and w > 20 and len(contour) < 375 and len(contour) > 200:
+				u=u+1
 				cv2.drawContours(img, [approx], 0, (0, 0, 255), 5)
 				ll=len(contour)
 				print("----------",ll,w)
@@ -120,11 +132,21 @@ def control_logic(sim):
 					cx = int(M['m10']/M['m00'])
 					cy = int(M['m01']/M['m00'])
 					print("CX : "+str(cx)+"  CY : "+str(cy))
-				if cx < 245 :
-					sim.setJointTargetVelocity(e,0.5)
-				elif cx > 250 :
-					sim.setJointTargetVelocity(r,0.5)
+				# if cy < 100 and flag6 ==1 :
+				# 	sim.setJointTargetVelocity(e,1)
+				# 	flag6=0
+				if cx < 179 :
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					sim.setJointTargetVelocity(e,0.7)
+					sim.setJointTargetVelocity(r,1.3)
+     
+				elif cx > 183 :
+					print("####################################################")
+					sim.setJointTargetVelocity(r,0.9)
+					sim.setJointTargetVelocity(e,1.1)
+
 				else :
+					# if flag6 ==0:
 					sim.setJointTargetVelocity(e,1)
 					sim.setJointTargetVelocity(r,1)
 		q=0
@@ -151,10 +173,34 @@ def control_logic(sim):
 			sim.setJointTargetVelocity(e,1)
 			sim.setJointTargetVelocity(r,1)
 		print(flag1,cx,cy)
-		# if flag1==1 and cx >220 and cy < 100 and cy > 40 and flag3==0:
-		if flag4==1 and flag3==0:
-			sim.setJointTargetVelocity(e,-1)
-			# print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+		if flag1==1 and cx >150 and cy > 0 and cy < 100 and flag3==0 :
+			if i==1:
+				turnleft()
+			if i==2:
+				turnright()
+			if i==3:
+				turnleft()
+			if i==4:
+				turnright()
+			if i==6:
+				turnright()
+			if i==7:
+				turnleft()
+			if i==8:
+				turnright()
+			if i==10:
+				turnright()
+       
+			# sim.setJointTargetVelocity(e,1)
+			# sim.setJointTargetVelocity(r,1)
+
+			# if flag4==1 and flag3==0:
+			# sim.setJointTargetVelocity(e,-1)
+			flag1=0
+			flag2=1
+			i=i+1
+				
+			print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 			# y=1
 			# while y:
 			# 	flag4=0
@@ -221,6 +267,195 @@ def read_qr_code(sim):
 
 	##################################################
 	return qr_message
+
+def turnleft():
+    
+	e=sim.getObject("/left_joint")
+	r=sim.getObject("/right_joint")
+	sim.setJointTargetVelocity(r,1)
+	sim.setJointTargetVelocity(e,-1)
+	m=sim.getObject("/vision_sensor")
+	time.sleep(1.5)
+
+	t=1
+	while t:
+		u=0
+		print("run")
+		img, resX, resY = sim.getVisionSensorCharImage(m)
+		# print(type(resX))
+		# resX=resX-20
+		# print(resX)
+		img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
+		img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
+		print(img.shape)
+		img=img[0:512,70:442]
+		hsv=cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+		low_b = np.array([0,0,168])
+		high_b = np.array([172,111,255])
+		# yellow_lower = np.array([20, 100, 100])
+		# yellow_upper = np.array([30, 255, 255])
+		mask = cv2.inRange(hsv, low_b, high_b)
+		# mask1 = cv2.inRange(hsv,yellow_lower,yellow_upper)
+		out = cv2.bitwise_and(img,img, mask= mask)
+		# out1 = cv2.bitwise_and(img,img, mask= mask1)
+		contours, hierarchy = cv2.findContours(mask, 1, cv2.CHAIN_APPROX_NONE)
+		# contours1, hierarchy1 = cv2.findContours(mask1, 1, cv2.CHAIN_APPROX_NONE)32,128
+		for contour in contours:
+			approx = cv2.approxPolyDP(contour, 0.01* cv2.arcLength(contour, True), True)
+			x,y,w,h=cv2.boundingRect(contour)
+			cv2.drawContours(img, [approx], 0, (0, 255, 255), 5)
+
+			# print(x,y,w,h)
+
+			# print("%%%%%%",w)
+			if w < 34  and w>26 and len(contour) < 350 and len(contour)>290 :
+				u=u+1
+				cv2.drawContours(img, [approx], 0, (255, 0, 255), 5)
+				ll=len(contour)
+				print("----------",ll,w)
+				M = cv2.moments(contour)
+				if M["m00"] !=0 :
+					cx = int(M['m10']/M['m00'])
+					cy = int(M['m01']/M['m00'])
+					print("CX : "+str(cx)+"  CY : "+str(cy))
+					time.sleep(0.3)
+					t=0
+
+		# print("run")
+		# img, resX, resY = sim.getVisionSensorCharImage(m)
+		# img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
+		# img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
+		# hsv=cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+		# low_b = np.array([0,0,168])
+		# high_b = np.array([172,111,255])
+		# # yellow_lower = np.array([20, 100, 100])
+		# # yellow_upper = np.array([30, 255, 255])
+		# mask = cv2.inRange(hsv, low_b, high_b)
+		# # mask1 = cv2.inRange(hsv,yellow_lower,yellow_upper)
+		# out = cv2.bitwise_and(img,img, mask= mask)
+		# # out1 = cv2.bitwise_and(img,img, mask= mask1)
+		# contours, hierarchy = cv2.findContours(mask, 1, cv2.CHAIN_APPROX_NONE)
+		# for contour in contours:
+		# 	approx = cv2.approxPolyDP(contour, 0.01* cv2.arcLength(contour, True), True)
+		# 	x,y,w,h=cv2.boundingRect(contour)
+		# 	# print(x,y,w,h)
+   
+		# 	# print("%%%%%%",w)
+		# 	if w < 34 and w>27 and len(contour) < 350 and len(contour)>280:
+		# 		u=u+1
+		# 		cv2.drawContours(img, [approx], 0, (0, 0, 255), 5)
+		# 		ll=len(contour)
+		# 		print("----------",ll,w)
+		# 		M = cv2.moments(contour)
+		# 		if M["m00"] !=0 :
+		# 			cx = int(M['m10']/M['m00'])
+		# 			cy = int(M['m01']/M['m00'])
+		# 			print("CX : "+str(cx)+"  CY : "+str(cy))
+		# 			# if cx <215 and cx > 200 and cy < 70:
+		# 			sim.setJointTargetVelocity(e,-1)
+		# 			t=0
+		cv2.imshow('maitrey',img)
+		cv2.waitKey(1)
+		client.step()  # triggers next simulation step
+	return
+
+def turnright():
+    
+	e=sim.getObject("/left_joint")
+	r=sim.getObject("/right_joint")
+	sim.setJointTargetVelocity(e,1)
+	sim.setJointTargetVelocity(r,-1)
+	m=sim.getObject("/vision_sensor")
+	time.sleep(1.5)
+
+	t=1
+	while t:
+		u=0
+		print("run")
+		img, resX, resY = sim.getVisionSensorCharImage(m)
+		# print(type(resX))
+		# resX=resX-20
+		# print(resX)
+		img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
+		img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
+		print(img.shape)
+		img=img[0:512,70:442]
+		hsv=cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+		low_b = np.array([0,0,168])
+		high_b = np.array([172,111,255])
+		# yellow_lower = np.array([20, 100, 100])
+		# yellow_upper = np.array([30, 255, 255])
+		mask = cv2.inRange(hsv, low_b, high_b)
+		# mask1 = cv2.inRange(hsv,yellow_lower,yellow_upper)
+		out = cv2.bitwise_and(img,img, mask= mask)
+		# out1 = cv2.bitwise_and(img,img, mask= mask1)
+		contours, hierarchy = cv2.findContours(mask, 1, cv2.CHAIN_APPROX_NONE)
+		# contours1, hierarchy1 = cv2.findContours(mask1, 1, cv2.CHAIN_APPROX_NONE)
+		for contour in contours:
+			approx = cv2.approxPolyDP(contour, 0.01* cv2.arcLength(contour, True), True)
+			x,y,w,h=cv2.boundingRect(contour)
+			cv2.drawContours(img, [approx], 0, (0, 255, 255), 5)
+
+			# print(x,y,w,h)
+
+			# print("%%%%%%",w)
+			if w < 34  and w>26 and len(contour) < 350 and len(contour)>270 :
+				u=u+1
+				cv2.drawContours(img, [approx], 0, (255, 0, 255), 5)
+				ll=len(contour)
+				print("----------",ll,w)
+				M = cv2.moments(contour)
+				if M["m00"] !=0 :
+					cx = int(M['m10']/M['m00'])
+					cy = int(M['m01']/M['m00'])
+					print("CX : "+str(cx)+"  CY : "+str(cy))
+					time.sleep(0.3)
+					t=0
+
+		# print("run")
+		# img, resX, resY = sim.getVisionSensorCharImage(m)
+		# img = np.frombuffer(img, dtype=np.uint8).reshape(resY, resX, 3)
+		# img = cv2.flip(cv2.cvtColor(img, cv2.COLOR_BGR2RGB), 0)
+		# hsv=cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+		# low_b = np.array([0,0,168])
+		# high_b = np.array([172,111,255])
+		# # yellow_lower = np.array([20, 100, 100])
+		# # yellow_upper = np.array([30, 255, 255])
+		# mask = cv2.inRange(hsv, low_b, high_b)
+		# # mask1 = cv2.inRange(hsv,yellow_lower,yellow_upper)
+		# out = cv2.bitwise_and(img,img, mask= mask)
+		# # out1 = cv2.bitwise_and(img,img, mask= mask1)
+		# contours, hierarchy = cv2.findContours(mask, 1, cv2.CHAIN_APPROX_NONE)
+		# for contour in contours:
+		# 	approx = cv2.approxPolyDP(contour, 0.01* cv2.arcLength(contour, True), True)
+		# 	x,y,w,h=cv2.boundingRect(contour)
+		# 	# print(x,y,w,h)
+   
+		# 	# print("%%%%%%",w)
+		# 	if w < 34 and w>27 and len(contour) < 350 and len(contour)>280:
+		# 		u=u+1
+		# 		cv2.drawContours(img, [approx], 0, (0, 0, 255), 5)
+		# 		ll=len(contour)
+		# 		print("----------",ll,w)
+		# 		M = cv2.moments(contour)
+		# 		if M["m00"] !=0 :
+		# 			cx = int(M['m10']/M['m00'])
+		# 			cy = int(M['m01']/M['m00'])
+		# 			print("CX : "+str(cx)+"  CY : "+str(cy))
+		# 			# if cx <215 and cx > 200 and cy < 70:
+		# 			sim.setJointTargetVelocity(e,-1)
+		# 			t=0
+		cv2.imshow('maitrey',img)
+		cv2.waitKey(1)
+		client.step()  # triggers next simulation step
+	return
+
+
+
+
+
+
+    
 
 
 ######### YOU ARE NOT ALLOWED TO MAKE CHANGES TO THE MAIN CODE BELOW #########
