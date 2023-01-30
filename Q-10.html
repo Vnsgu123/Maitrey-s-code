@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function leapyear()
+        {
+            x=document.getElementById("num").value 
+            if (x%4==0 || x%100!= 0 && x%400==0)
+            {
+                document.getElementById("sp1").innerHTML="LEAP YEAR"
+            }
+            else
+            {
+                document.getElementById("sp1").innerHTML="NOT A LEAP YEAR"
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>ENTER A YEAR</p>
+    YEAR<input type="number" id="num" placeholder="enter a number">
+    <button type="button" onclick="leapyear()">click it</button><br><br>
+    <span id="sp1"></span>
+</body>
+</html>

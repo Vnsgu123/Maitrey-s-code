@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fun()
+        {
+            let x = document.getElementById("str").value 
+            let y=x.split('.').pop()    
+            document.getElementById("sp1").innerHTML=y                  
+        }
+    </script>
+</head>
+<body>
+    <p>ENTER A FILENAME</p>
+    <input type="string" id="str" placeholder="enter a string">
+    <button type="button" onclick="fun()">click it</button><br><br>
+    <span id="sp1"></span>
+</body>
+</html>

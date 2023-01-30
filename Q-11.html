@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function diff()
+        {
+            let x=document.getElementById("str1").value 
+            let y=document.getElementById("str2").value
+
+            let date1 = new Date(x);
+            let date2 = new Date(y);
+        
+            let Difference_In_Time = date1.getTime() - date2.getTime();
+            let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+            document.getElementById("sp1").innerHTML="Total number of days between dates  <br>"+ date1 + "<br> and <br>" + date2 + " is: <br> " + Difference_In_Days
+            
+
+              
+        
+
+        }
+    </script>
+</head>
+<body>
+    <p>ENTER A DATE</p>
+    Date1<input type="date" id="str1" placeholder="enter a date"><br>
+    Date2<input type="date" id="str2" placeholder="enter a date">
+    <button type="button" onclick="diff()">click it</button><br>
+    <span id="sp1"></span>
+
+</body>
+</html>

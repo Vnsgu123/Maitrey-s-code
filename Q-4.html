@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //k=document.getElementById("num")
+        function factorial(p1){
+            //document.write("maiiiiiii")
+            //let x = document.getElementById("num")
+            if (p1==1)
+            {
+                return 1 
+            }
+            else
+            {
+                return p1*factorial(p1-1)
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>enter a number</p>
+    Number<input type="number" id="num" value="0">
+    <span id="span"></span>
+    <script> 
+        let k=document.getElementById("num")
+        v=k.value
+        document.write("ssssssssssss",v)
+        document.write(factorial(v))
+        document.getElementById("span").innerHTML=factorial(v)
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function diff()
+        {
+            let dob=document.getElementById("str1").value
+            var diff_ms = Date.now() - dob.getTime()
+            var age_dt = new Date(diff_ms)
+            x=Math.abs(age_dt.getUTCFullYear() - 1970)
+            document.getElementById("sp1").innerHTML=x
+        }
+    </script>
+</head>
+<body>
+    <p>ENTER A DATE</p>
+    Date1<input type="date" id="str1" placeholder="enter a date"><br>
+    <button type="button" onclick="diff()">click it</button><br>
+    <span id="sp1"></span>
+
+</body>
+</html>

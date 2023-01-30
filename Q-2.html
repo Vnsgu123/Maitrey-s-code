@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>enter a tempreature in fahernite</p>
+    Tempreature:<input type="number" id="num" value ="30">
+    <button type ="button" onclick="tocelcius()">click it</button><br>
+    <span id="sp1"></span>
+    <script>
+        function tocelcius(){
+            let x = document.getElementById("num")
+            let v=x.value
+            v=parseInt(v)
+            //document.write("ooo = ",v)
+            //v=parseInt(v)
+            let c=0
+            c=parseInt(c)
+            //document.write("v,c",v,"   ",c)
+            c=(v-32)/1.8
+            //document.write("   v,c  ",v,c)
+            document.getElementById("sp1").innerHTML="celcius tempreature is "+c
+
+        }
+        //document.getElementById("demo").innerHTML="celcius tempreature is "+c
+    </script>
+</body>
+</html>

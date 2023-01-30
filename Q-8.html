@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fun()
+        {
+            let x=document.getElementById("str").value 
+            //document.write(x[0]," ",x[1]," ",x[2])
+            let i=0
+            let j=0
+            let l=x.length
+            let max=0
+            let p=0
+            while (l>0)
+            {
+                //document.write("##",x[i],"##")
+                while(x[i] != " ")
+                {
+                    p=p+1
+                    i=i+1
+                    l=l-1
+                    //document.write(p," ",i," ",l,"---")
+                    if (l==0)
+                    {
+                        break
+                    }
+                }
+                if(p>max)
+                {
+                    max=p
+                }
+                //document.write(max,"uieuhwufdw")
+                p=0
+                l=l-1
+                i=i+1
+            }
+            document.getElementById("sp1").innerHTML="Maximum length is "+max
+        }
+    </script>
+</head>
+<body>
+    <p>ENTER A STRING</p>
+    String<input type="string" id="str" placeholder="enter a string">
+    <button type="button" onclick="fun()">click it</button><br><br>
+    <span id="sp1"></span>
+</body>
+</html>

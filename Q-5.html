@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function check()
+        {
+            let x=document.getElementById("str").value
+            //document.write(x,"uuuuu")
+            if (x == "")
+            {
+                alert("ENTER A STRING")
+            }
+            else
+            {
+                function palindrome(x)
+                {
+                    //document.write("start")
+
+                    let i = 0
+                    let l=x.length
+                    /*while(x[i]!='\0')
+                    {
+                        l=l+1
+                        document.write(l," ",x[i],":")
+                        if (l > 6)
+                        {
+                            break
+                        }
+                        i=i+1
+                    }*/
+                    let k=l
+                    k=k-1
+                    l=l/2
+                    let flag=0
+                    let j=0
+                    for(j=0;j<l;j++)
+                    {
+                        if (x[j] != x[k])
+                        {
+                            flag=1
+                            break
+                        }
+                        k=k-1
+                    }
+                    if (flag == 1)
+                    {
+                        //document.getElementById("sp1")="Not a palindrome"
+                        return "NOT A PALINDROME"
+                    }
+                    else
+                    {
+                        //document.getElementById("sp1")="palindrome"
+                        //document.write("kliop")
+                        return "PALINDROME"
+                    }
+                }
+                //document.write("mmmmmmmm")
+                let result=palindrome(x)
+                document.getElementById("sp1").innerHTML=result
+
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>enter a string</p>
+    String:<input type="string" id="str">
+    <button type="button" onclick="check()">click it</button><br>
+    <span id="sp1"></span>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function check(){
+            let x = document.getElementById("num")
+            let v = x.value 
+            //document.write("jhcwnhiucew")
+            v=parseInt(v)
+            if (v<0)
+            {
+                document.getElementById("sp1").innerHTML='invalid number'
+            }
+            else
+            {
+            if (v%2 == 0)
+            {
+                document.getElementById("sp1").innerHTML='Even Number = '+v
+            }
+            else
+            {
+                document.getElementById("sp1").innerHTML='odd Number = '+v
+            }
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>enter a number</p>
+    Number:<input type="number" id="num" value="0">
+    <button onclick="check()">click it</button><br>
+    <span id ="sp1"></span>
+    
+</body>
+</html>
