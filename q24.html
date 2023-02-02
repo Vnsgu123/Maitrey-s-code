@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script>
+        function change2() {
+            document.getElementById("img1").style.width = document.getElementById("imgsize").value + "px"
+            document.getElementById("img1").style.height = document.getElementById("imgsize").value + "px"
+        }
+    </script>
+</head>
+
+<body>
+    <img src="3.png" id="img1" height="450px" width="900px">
+    <br>
+    <input type="text" id="imgsize">
+    <button id="btn2" onclick="change2()">ChangeSize</button>
+
+    <br><br>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Default</title>
+    <script>
+        function checkfact() {
+            var temp = document.getElementById("tvalue").value
+            for (let i = 2; i < temp; i++) {
+                if (temp % i == 0) {
+                    document.getElementById("sp1").innerHTML = "Not Prime"
+                    return;
+                }
+            }
+            document.getElementById("sp1").innerHTML = "Prime"
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button onclick="checkfact()">Click</button>
+    <span id="sp1"></span>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<html>
+
+<head>
+
+    <title>DATE</title>
+    <script>
+
+        function res() {
+
+            var d = new Date(txtD.value);
+
+            //alert(d);
+
+            var m = Date.now() - d.getTime();
+
+            var dt = new Date(m);
+
+            var y = dt.getUTCFullYear();
+
+            var a = Math.abs(y - 1970);
+
+            document.getElementById("txtR").value = a + " years";
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <h2 align="center">= DATE =</h2>
+
+    <form name="f1">
+
+        <table align="center">
+
+            <tr>
+
+                <td><b>DATE: </b></td>
+
+                <td><input type="text" placeholder="MM/DD/YYYY" id="txtD"></td>
+
+            </tr>
+
+            <tr>
+
+                <td></td>
+
+                <td><input type="button" value="AGE" onclick="res()" class="btn"></td>
+
+            </tr>
+
+            <tr>
+
+                <td><b>AGE: </b></td>
+
+                <td><input type="text" id="txtR"></td>
+
+            </tr>
+
+        </table>
+
+    </form>
+
+</body>
+
+</html>

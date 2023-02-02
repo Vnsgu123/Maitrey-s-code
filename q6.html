@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <script>
+        function ctouc() {
+            var s1 = document.getElementById("tvalue").value
+
+            var splitStr = s1.split(" ")
+
+            for (var i = 0; i < splitStr.length; i++) {
+                splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+            }
+
+            splitStr = splitStr.join(' ')
+
+            document.getElementById("sp1").innerHTML = splitStr
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button type="submit" onclick="ctouc()">Submit</button>
+    <span id="sp1"></span>
+
+</body>
+
+</html>

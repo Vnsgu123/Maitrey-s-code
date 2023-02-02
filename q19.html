@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title> Array</title>
+    <script>
+        function rev() {
+            const url = 'http://www.google.com/page1.html';
+            const parsedUrl = new URL(url);
+
+            const protocol = parsedUrl.protocol;
+            const domain = parsedUrl.hostname;
+            const page = parsedUrl.pathname.split('/').pop();
+            const extension = page.split('.').pop();
+
+            document.getElementById("sp1").innerHTML = ('Protocol:', protocol);
+            document.getElementById("sp1").innerHTML += ('Domain:', domain);
+            document.getElementById("sp1").innerHTML += ('Page:', page);
+            document.getElementById("sp1").innerHTML += ('Extension:', extension);
+        }
+    </script>
+</head>
+
+<body>
+    <form id="f1">
+        <input type="text" id="text1" name="txt1">
+        <input type="button" id="sum_btn" value="sum" onclick="rev()">
+    </form>
+</body>
+
+</html>

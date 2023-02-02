@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <script>
+        function filexten() {
+            var temp = document.getElementById("tvalue").value
+            temp = temp.split(".")
+            let lt = temp.length
+            document.getElementById("sp1").innerHTML =temp[lt - 1]
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button type="submit" onclick="filexten()">Submit</button>
+    <span id="sp1"></span>
+
+
+</body>
+
+</html>

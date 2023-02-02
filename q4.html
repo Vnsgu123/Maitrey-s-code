@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Default</title>
+    <script>
+        function fact(n) {
+            if (n >= 1) {
+                return n * fact(n - 1)
+            }
+            else
+                return 1
+        }
+
+        function checkfact() {
+            var n = Number(document.getElementById("tvalue").value)
+            document.getElementById("sp1").innerHTML =fact(n)
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button onclick="checkfact()">Click</button>
+    <span id="sp1"></span>
+</body>
+
+</html>

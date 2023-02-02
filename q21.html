@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script>
+        function tableadd() {
+            var temp = document.getElementById('txt1').value
+            var temp2 = document.getElementById('txt2').value
+            var table = document.querySelector('table')
+            var tb = document.createElement('table')
+            var tr = document.createElement("tr")
+            var cell1 = document.createElement("td")
+            var celltext = document.createTextNode(temp)
+            cell1.appendChild(celltext)
+            var cell2 = document.createElement("td")
+            celltext = document.createTextNode(temp2)
+            cell2.appendChild(celltext)
+            tr.append(cell1)
+            tr.append(cell2)
+            table.append(tr)
+
+        }
+    </script>
+</head>
+
+<body>
+    <br><br>
+
+    <table border="1" id="t1">
+        <tr>
+            <th>Heading 1</th>
+            <th>Heading 2</th>
+        </tr>
+    </table>
+
+    <input type="text" id="txt1">
+    <input type="text" id="txt2">
+
+    <button id="btn3" onclick="tableadd()">Add</button>
+</body>
+
+</html>

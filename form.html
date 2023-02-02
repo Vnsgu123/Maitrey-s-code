@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Form</title>
+    <script>
+        function validateform() {
+            var strname = document.forms["regform"]["fname"].value
+            var strphn = document.forms["regform"]["phn"].value
+            var gnarr = document.getElementsByName("gender")
+            if (strname.length == 0 || strname.length < 5) {
+                document.getElementById("fspan").innerHTML = " Invalid Name"
+                document.getElementById("fspan").style.color = "red"
+                return false
+            }
+            else if (!(strphn >= 15 && strphn <= 20)) {
+                document.getElementById("pspan").innerHTML = "Invalid Age"
+                document.getElementById("pspan").style.color = "red"
+                return false
+            }
+            else {
+                if (document.getElementsByName("gender")[0].checked == false && document.getElementsByName("gender")[1].checked == false) {
+                    document.getElementById("gspan").innerHTML = "Please Select Gender"
+                    document.getElementById("gspan").style.color = "red"
+                    return false
+                }
+            }
+            return true
+        }
+
+        
+        function validname() {
+            var strname = document.forms["regform"]["fname"].value
+            if (strname.length == 0 || strname.length < 5) {
+                document.getElementById("fspan").innerHTML = " Invalid Name"
+                document.getElementById("fspan").style.color = "red"
+            }
+            else {
+                document.getElementById("fspan").innerHTML = ""
+            }
+        }
+
+        function validage() {
+            var strphn = document.forms["regform"]["phn"].value
+            if (!(strphn >= 15 && strphn <= 20)) {
+                document.getElementById("pspan").innerHTML = "Invalid Age"
+                document.getElementById("pspan").style.color = "red"
+            }
+            else {
+                document.getElementById("pspan").innerHTML = ""
+            }
+        }
+
+        function validgender() {
+            var gnarr = document.getElementsByName("gender")
+            if (document.getElementsByName("gender")[0].checked == false && document.getElementsByName("gender")[1].checked == false) {
+                document.getElementById("gspan").innerHTML = "Please Select Gender"
+                document.getElementById("gspan").style.color = "red"
+            }
+            else {
+                document.getElementById("gspan").innerHTML = ""
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form name="regform" onsubmit="return validateform()" action="action.php">
+        Name <input type="text" name="fname" oninput="return validname()"><span id="fspan"></span><br><br>
+        Age <input type="text" name="phn" oninput="return validage()"><span id="pspan"></span><br><br>
+        Gender : Male <input type="radio" value="male" name="gender" oninput="return validgender()"> Female <input
+            type="radio" value="female" name="gender"><span id="gspan"></span><br><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>

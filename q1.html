@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Default</title>
+    <script>
+        function reverse() {
+            var num = document.getElementById("tvalue").value
+            var temp1=0
+            var res = 0, temp = 0;
+            while (num > 0) {
+                res = (res * 10) + (num % 10)
+                num = num / 10 | 0;
+            }
+            document.getElementById("sp1").innerHTML=res
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button onclick="reverse()">Click</button>
+    <span id="sp1"></span>
+</body>
+
+</html>

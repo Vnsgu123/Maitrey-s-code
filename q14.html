@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title> Array</title>
+    <script>
+        var arr=new Array();
+        function addelementarr() {
+            arr.push(Number(document.getElementById("tvalue").value))
+            document.getElementById('tvalue').value = ""
+        }
+
+        function sumup() {
+            var temp = 0
+            for (let i = 0; i < arr.length; i++) {
+                temp = temp + arr[i]
+            }
+            document.getElementById("sp1").innerHTML = temp
+        }
+    </script>
+</head>
+
+<body>
+    <form id="f1">
+        <input type="text" id="tvalue" name="txt1">
+        <input type="button" id="add_btn" value="add" onclick="addelementarr()">
+        <input type="button" id="sum_btn" value="sum" onclick="sumup()">
+        <span id="sp1"></span>
+    </form>
+</body>
+
+</html>

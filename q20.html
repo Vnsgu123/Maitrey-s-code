@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script>
+        function ret(){
+            var temp=document.getElementsByTagName('a')
+            document.getElementById('sp1').innerHTML=(temp[0].href)+"<br>"
+            document.getElementById('sp1').innerHTML+=(temp[0].target)+"<br>"
+            document.getElementById('sp1').innerHTML+=(temp[0].hreflang)+"<br>"
+            document.getElementById('sp1').innerHTML+=(temp[0].rel)+"<br>"
+            document.getElementById('sp1').innerHTML+=(temp[0].type)+"<br>"
+        }
+    </script>
+</head>
+<body onload="ret()">
+    <a href="http://127.0.0.1:5500/temp/temp.html" target="_self" hreflang="html/js" rel="js" type="javascript">google</a>
+    <br>
+    <span id="sp1"></span>
+</body>
+</html>

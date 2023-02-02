@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script>
+        function AddCombo() {
+            temp = document.getElementById("tvalue").value
+
+            let newopt = new Option(temp, temp)
+
+            const select = document.querySelector('select')
+
+            select.add(newopt, undefined)//undefined is index number
+        }
+    </script>
+</head>
+
+<body>
+
+    <br><br>
+    <form id="f1">
+        <label>Choose a car:</label>
+        <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+
+    </form>
+
+    <input type="text" id="tvalue">
+
+    <button id="btn6" onclick="AddCombo()">AddCombo</button>
+</body>
+
+</html>

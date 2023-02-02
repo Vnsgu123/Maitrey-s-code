@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <script>
+        function longestword() {
+            var temp = document.getElementById("tvalue").value
+            temp = temp.split(" ")
+            //console.log(temp)
+            var max = temp[0].length
+            var ck = 0
+            for (let i = 0; i < temp.length; i++) {
+                if (max < temp[i].length) {
+                    max = temp[i].length
+                    ck = i
+                }
+            }
+            document.getElementById("sp1").innerHTML = temp[ck]
+        }
+
+    </script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button type="submit" onclick="longestword()">Submit</button>
+    <span id="sp1"></span>
+</body>
+
+</html>

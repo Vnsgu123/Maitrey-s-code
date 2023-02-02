@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script>
+        function changecolor() {
+            var temp = document.getElementsByTagName("p")
+            var tempc = document.getElementById('colorname').value
+
+            for (let i = 0; i < temp.length; i++) {
+                temp[i] = temp[i].style.color = tempc
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p id="i1">this is para tag</p><br><br>
+    <input type="text" id="colorname">
+    <button id="btn1" onclick="changecolor()">changecolor</button>
+</body>
+
+</html>

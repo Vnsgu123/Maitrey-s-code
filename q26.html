@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script>
+        console.log("Dom 26")
+        function DispCombo() {
+            var temp = document.getElementsByTagName("option")
+            for (let i = 0; i < temp.length; i++) {
+                alert(temp[i].value)
+            }
+            alert(temp.length)
+        }
+    </script>
+</head>
+
+<body>
+    <br><br>
+    <form id="f1">
+        <label>Choose a car:</label>
+        <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+
+    </form>
+    <button id="btn5" onclick="DispCombo()">DispCombo</button><br>
+</body>
+
+</html>

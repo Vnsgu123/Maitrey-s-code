@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script>
+        function dispelements() {
+            var tempf = document.forms["regform"]
+            document.getElementById("sp1").innerHTML = ""
+            for (let i = 0; i < tempf.length; i++) {
+                document.getElementById("sp1").innerHTML += tempf[i].value
+            }
+            return false
+        }
+    </script>
+</head>
+
+<body>
+
+    <form name="regform" onsubmit="return dispelements()" action="action.php">
+        Name <input type="text" name="fname"><span id="fspan"></span><br><br>
+        Age <input type="text" name="phn"><span id="pspan"></span><br><br>
+        Gender : Male <input type="radio" value="male" name="gender"> Female <input type="radio" value="female"
+            name="gender"><span id="gspan"></span><br><br>
+        <input type="submit">
+    </form>
+
+    <span id="sp1"></span>
+
+</body>
+
+</html>

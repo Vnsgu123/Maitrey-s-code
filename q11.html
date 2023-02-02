@@ -1,0 +1,47 @@
+<html>
+
+<head>
+
+    <title>DATE</title>
+
+    <script>
+
+        function res() {
+            var d1 = new Date(txtD1.value);
+            var d2 = new Date(txtD2.value);
+
+            //alert(d1);
+            var Tdiff = d2.getTime() - d1.getTime();
+            var Ddiff = Tdiff / (1000 * 60 * 60 * 24);
+            document.getElementById("txtR").value = Ddiff + " days";
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <form name="f1">
+        <table align="center">
+            <tr>
+                <td><b>DATE 1:</b></td>
+                <td><input type="text" placeholder="MM/DD/YYYY" id="txtD1"></td>
+            </tr>
+            <tr>
+                <td><b>DATE 2:</b></td>
+                <td><input type="text" placeholder="MM/DD/YYYY" id="txtD2"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="DIFFERENCE" onclick="res()" class="btn"></td>
+            </tr>
+            <tr>
+                <td><b>RESULT:</b></td>
+                <td><input type="text" id="txtR"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

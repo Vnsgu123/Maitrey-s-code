@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <script>
+        function ckpal() {
+            var s1 = document.getElementById("tvalue").value
+
+            var s2 = s1.toString()
+
+            s2 = s2.split("")
+
+            s2 = s2.reverse()
+
+            s2 = s2.join("")
+
+            if (s1 == s2)
+            document.getElementById("sp1").innerHTML = "Palindrome"
+            else
+            document.getElementById("sp1").innerHTML = "Not Palindrome"
+        }</script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button type="submit" onclick="ckpal()">Submit</button>
+    <span id="sp1"></span>
+</body>
+
+</html>

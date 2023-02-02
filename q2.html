@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Default</title>
+    <script>
+        function convert() {
+            var temp = document.getElementById("tvalue").value
+            var f = (9 / 5) * temp + 32
+
+
+            var c = (temp - 32) / 1.8
+            document.getElementById("sp1").innerHTML = "c = " + c + " f = " + f
+
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="tvalue">
+    <button onclick="convert()">Click</button>
+    <span id="sp1"></span>
+</body>
+
+</html>

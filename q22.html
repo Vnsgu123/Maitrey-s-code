@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script>
+        function counth1() {
+            var temp = Array.from(document.querySelectorAll('h1'))
+
+            document.getElementById("sp1").innerHTML = temp.length
+        }
+    </script>
+</head>
+
+<body>
+    <h1>hi</h1>
+    <h1>how</h1>
+    <h1>are</h1>
+    <h1>you</h1>
+    <h1>?</h1>
+    <button id="btn2" onclick="counth1()">CountH1</button>
+    <span id="sp1"></span>
+</body>
+
+</html>

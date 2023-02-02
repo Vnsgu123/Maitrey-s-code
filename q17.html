@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title> Array</title>
+    <script>
+        function rev() {
+            var arr = ["str1", " str2", " str3"];
+
+            var str = ""
+
+            for (var i = 0; i < arr.length - 1; i++) {
+                str = str + arr[i] + "+"
+            }
+
+            str = str + arr[i + 1]
+
+            document.getElementById("sp1").innerHTML = str
+        }
+    </script>
+</head>
+
+<body>
+    <form id="f1">
+        <input type="text" id="text1" name="txt1">
+        <input type="button" id="sum_btn" value="sum" onclick="rev()">
+        <span id="sp1"></span>
+    </form>
+</body>
+
+</html>

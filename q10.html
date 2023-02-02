@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script>
+        function ckleap(){
+            var ndt=new Date()
+            var temp=ndt.getFullYear()
+            //var temp=document.getElementById("tvalue").value
+            if(temp%400==0)
+            {
+                document.getElementById("sp1").innerHTML ="Leap"
+            }
+            else if(temp%100!=0 && temp%4==0)
+            {
+                document.getElementById("sp1").innerHTML ="Leap"
+            }
+            else{
+                document.getElementById("sp1").innerHTML ="Non Leap"
+            }
+        }
+    </script>
+</head>
+<body onload="ckleap()">
+    <span id="sp1"></span>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<html>
+
+<head>
+
+    <title>DATE</title>
+
+</head>
+
+<body style="text-align:center;" id="body">
+
+    <table align="center" width="30%">
+
+        <tr>
+
+            <td align="right">DATE: </td>
+
+            <td>
+                <div id="div1" style="font-size:15px; font-weight:bold;"></div>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td><br></td>
+        </tr>
+
+        <tr>
+
+            <td></td>
+
+            <td align="center"><input type="button" value="ADD_MINUTES" onclick="add()" class="btn"></td>
+
+        </tr>
+
+        <tr>
+            <td><br></td>
+        </tr>
+
+        <tr>
+
+            <td align="right"><b>
+                    <div id="div">
+                </b></td>
+
+            <td>
+                <div id="div2" style="font-size:15px; font-weight:bold;"></div>
+            </td>
+
+        </tr>
+
+
+
+        <script>
+
+            var current = document.getElementById("div1");
+
+            var after = document.getElementById("div2");
+
+            var today = new Date();
+
+            current.innerHTML = today;
+
+            Date.prototype.addMins = function (m) {
+
+                this.setTime(this.getTime() + (m * 60 * 1000));
+
+                return this;
+
+            }
+
+            function add() {
+
+                var a = new Date();
+
+                a.addMins(4);
+
+                document.getElementById("div").innerHTML = "AFTER ADDING:";
+
+                after.innerHTML = a;
+
+            }
+
+        </script>
+
+</body>
+
+</html>
